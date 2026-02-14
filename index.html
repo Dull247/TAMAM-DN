@@ -56,123 +56,578 @@
 
     <!-- ALL UI/UX STYLES INLINED - guaranteed to load -->
     <style>
-/* Design system tokens */
-:root {
-    --color-primary: #006C35;
-    --color-primary-rgb: 0, 108, 53;
-    --color-dark: #052e16;
-    --color-gold: #D4AF37;
-    --space-1: 8px; --space-2: 16px; --space-3: 24px; --space-4: 32px; --space-6: 48px; --space-8: 64px; --space-12: 96px;
-    --section-gap-desktop: 64px; --section-gap-mobile: 40px; --content-max: 1200px;
-    --ease-out: cubic-bezier(0.22, 1, 0.36, 1); --transition-fast: 200ms ease-out; --transition-medium: 250ms ease-out;
-    --header-height: 80px; --header-height-scrolled: 64px;
-    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08); --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1);
-}
-html { scroll-behavior: smooth; scroll-padding-top: 96px; -webkit-font-smoothing: antialiased; }
-body { overflow-x: hidden; }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *,*::before,*::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+        /* Design system tokens */
+        :root {
+            --color-primary: #006C35;
+            --color-primary-rgb: 0, 108, 53;
+            --color-dark: #052e16;
+            --color-gold: #D4AF37;
+            --space-1: 8px;
+            --space-2: 16px;
+            --space-3: 24px;
+            --space-4: 32px;
+            --space-6: 48px;
+            --space-8: 64px;
+            --space-12: 96px;
+            --section-gap-desktop: 64px;
+            --section-gap-mobile: 40px;
+            --content-max: 1200px;
+            --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+            --transition-fast: 200ms ease-out;
+            --transition-medium: 250ms ease-out;
+            --header-height: 80px;
+            --header-height-scrolled: 64px;
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
 
-.skip-link { position: absolute; top: 16px; right: 16px; z-index: 100; padding: 16px 32px; background: #006C35; color: #fff; font-weight: 700; border-radius: 8px; transform: translateY(-120%); transition: transform 200ms ease-out; }
-.skip-link:focus { transform: translateY(0); outline: 3px solid #D4AF37; outline-offset: 2px; }
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 96px;
+            -webkit-font-smoothing: antialiased;
+        }
 
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-thumb { background: rgba(0,108,53,0.4); border-radius: 99px; }
+        body {
+            overflow-x: hidden;
+        }
 
-.heading-hero { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; }
-.section-headline { font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 700; line-height: 1.2; }
-.subheading { font-size: clamp(1.125rem, 1.5vw, 1.5rem); font-weight: 500; line-height: 1.4; }
-.body-text { font-size: clamp(1rem, 1.5vw, 1.125rem); line-height: 1.6; max-width: 65ch; }
-.text-balance { text-wrap: balance; }
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
 
-.container-premium { max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 24px; padding-right: 24px; }
-@media (min-width: 640px) { .container-premium { padding-left: 32px; padding-right: 32px; } }
-.section-spacing { padding-top: 40px; padding-bottom: 40px; }
-@media (min-width: 1024px) { .section-spacing { padding-top: 64px; padding-bottom: 64px; } }
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
 
-.glass { background: rgba(255,255,255,0.6); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.8); box-shadow: var(--shadow-md); }
-.text-gradient { background: linear-gradient(135deg, #006C35 0%, #10b981 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .skip-link {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            z-index: 100;
+            padding: 16px 32px;
+            background: #006C35;
+            color: #fff;
+            font-weight: 700;
+            border-radius: 8px;
+            transform: translateY(-120%);
+            transition: transform 200ms ease-out;
+        }
 
-.btn-premium { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 16px 32px; transition: transform 200ms ease-out, box-shadow 200ms ease-out; border-radius: 8px; }
-.btn-premium:hover { transform: scale(1.02); box-shadow: 0 10px 25px -5px rgba(0,108,53,0.35); }
-.btn-premium:active { transform: scale(0.98); }
-.btn-premium:focus-visible { outline: 3px solid #D4AF37; outline-offset: 2px; }
-.btn-premium:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-@media (max-width: 639px) { .btn-primary-mobile { min-height: 56px; } }
+        .skip-link:focus {
+            transform: translateY(0);
+            outline: 3px solid #D4AF37;
+            outline-offset: 2px;
+        }
 
-.card-hover { transition: transform 250ms var(--ease-out), box-shadow 250ms var(--ease-out); }
-.card-hover:hover { transform: translateY(-6px); box-shadow: 0 24px 30px -8px rgba(0,108,53,0.15); }
-.spotlight-card { position: relative; overflow: hidden; }
-.spotlight-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(600px circle at var(--mouse-x,50%) var(--mouse-y,50%), rgba(16,185,129,0.08), transparent 40%); opacity: 0; transition: opacity 0.5s; pointer-events: none; z-index: 1; }
-.spotlight-card:hover::before { opacity: 1; }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
 
-.site-header { height: 80px; transition: height 250ms ease-out, box-shadow 200ms ease-out; }
-.scrolled-header { height: 64px !important; min-height: 64px; background: rgba(255,255,255,0.98) !important; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
-.site-header .header-inner { padding-top: 32px; padding-bottom: 32px; transition: padding 250ms ease-out; }
-.scrolled-header .header-inner { padding-top: 16px; padding-bottom: 16px; }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0, 108, 53, 0.4);
+            border-radius: 99px;
+        }
 
-/* SCROLL PROGRESS - very visible */
-.page-progress { height: 6px !important; background: linear-gradient(90deg, #006C35, #10b981) !important; transition: width 150ms ease-out; z-index: 60; }
+        .heading-hero {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
 
-.textarea-premium { min-height: 192px; padding: 24px; border: 2px solid #e2e8f0; border-radius: 8px; resize: none; transition: border-color 200ms, box-shadow 200ms; }
-.textarea-premium:focus { outline: none; border-color: #006C35; box-shadow: 0 0 0 4px rgba(0,108,53,0.15); }
+        .section-headline {
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            font-weight: 700;
+            line-height: 1.2;
+        }
 
-.wizard-container { position: relative; min-height: 400px; }
-.step-content { display: none; opacity: 0; transform: translateX(20px); transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out); }
-.step-content.active { display: block; opacity: 1; transform: translateX(0); }
-[dir="rtl"] .step-content { transform: translateX(-20px); }
-[dir="rtl"] .step-content.active { transform: translateX(0); }
-.wizard-progress-bar { height: 10px; border-radius: 999px; background: #f1f5f9; overflow: hidden; }
-.wizard-progress-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, #006C35, #10b981); transition: width 500ms var(--ease-out); }
+        .subheading {
+            font-size: clamp(1.125rem, 1.5vw, 1.5rem);
+            font-weight: 500;
+            line-height: 1.4;
+        }
 
-.btn-ripple { position: relative; overflow: hidden; }
-.ripple { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.4); transform: scale(0); animation: ripple 300ms ease-out; pointer-events: none; }
-@keyframes ripple { to { transform: scale(4); opacity: 0; } }
+        .body-text {
+            font-size: clamp(1rem, 1.5vw, 1.125rem);
+            line-height: 1.6;
+            max-width: 65ch;
+        }
 
-.toast-container { position: fixed; top: 24px; right: 24px; z-index: 9999; display: flex; flex-direction: column-reverse; gap: 16px; pointer-events: none; }
-.toast { pointer-events: auto; animation: toastIn 0.4s cubic-bezier(0.68,-0.6,0.32,1.6); }
-@keyframes toastIn { from { opacity: 0; transform: translateX(50px) scale(0.9); } to { opacity: 1; transform: translateX(0) scale(1); } }
+        .text-balance {
+            text-wrap: balance;
+        }
 
-.bottom-bar { transform: translateY(100%); transition: transform 0.3s var(--ease-out); }
-.bottom-bar.visible { transform: translateY(0); }
+        .container-premium {
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 24px;
+            padding-right: 24px;
+        }
 
-.back-to-top { position: fixed; bottom: 64px; right: 24px; z-index: 40; width: 52px; height: 52px; border-radius: 50%; opacity: 0; transform: translateY(20px); pointer-events: none; transition: opacity 300ms, transform 300ms; box-shadow: 0 8px 24px rgba(0,108,53,0.3); }
-.back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
-.back-to-top:hover { transform: translateY(0) scale(1.08); box-shadow: 0 12px 28px rgba(0,108,53,0.4); }
-@media (max-width: 767px) { .back-to-top { bottom: 100px; } }
+        @media (min-width: 640px) {
+            .container-premium {
+                padding-left: 32px;
+                padding-right: 32px;
+            }
+        }
 
-.hero-image-container { perspective: 1000px; }
-.blob-bg { animation: blob 10s infinite alternate cubic-bezier(0.4,0,0.2,1); filter: blur(60px); }
-@keyframes blob { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(30px,-30px) scale(1.1); } }
-.animate-float { animation: float 6s ease-in-out infinite; }
-@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        .section-spacing {
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
 
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out); }
-.reveal.active { opacity: 1; transform: translateY(0); }
-@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
+        @media (min-width: 1024px) {
+            .section-spacing {
+                padding-top: 64px;
+                padding-bottom: 64px;
+            }
+        }
 
-.stagger-child > * { opacity: 0; animation: fadeUpStagger 0.5s var(--ease-out) forwards; }
-@keyframes fadeUpStagger { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-.stagger-child > *:nth-child(1){animation-delay:0ms}.stagger-child > *:nth-child(2){animation-delay:50ms}.stagger-child > *:nth-child(3){animation-delay:100ms}.stagger-child > *:nth-child(4){animation-delay:150ms}.stagger-child > *:nth-child(5){animation-delay:200ms}.stagger-child > *:nth-child(6){animation-delay:250ms}
+        .glass {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: var(--shadow-md);
+        }
 
-.btn-loading { pointer-events: none; position: relative; }
-.btn-loading .btn-text { visibility: hidden; }
-.btn-loading .btn-spinner { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
-.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+        .text-gradient {
+            background: linear-gradient(135deg, #006C35 0%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-/* ========== BOLD VISUAL CHANGES SO YOU SEE THE DIFFERENCE ========== */
-#home { background: linear-gradient(180deg, #ecfdf5 0%, #f0fdf4 40%, #ffffff 100%) !important; }
-#services { background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%) !important; }
-#services .spotlight-card { border: 2px solid #e2e8f0; border-radius: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
-#services .spotlight-card:hover { border-color: #86efac; box-shadow: 0 24px 40px -12px rgba(0,108,53,0.2); }
-#back-to-top { background: linear-gradient(135deg, #006C35, #059669) !important; color: #fff !important; border: none !important; }
-#back-to-top i { color: #fff !important; }
-nav.site-header { border-bottom: 2px solid #e2e8f0; }
-nav.scrolled-header { border-bottom-color: #cbd5e1; }
-a[href="#wizard"].btn-premium, .bg-saudi-900.btn-premium { background: linear-gradient(135deg, #006C35, #047857) !important; box-shadow: 0 8px 24px rgba(0,108,53,0.35); }
-a[href="#wizard"].btn-premium:hover, .bg-saudi-900.btn-premium:hover { box-shadow: 0 12px 32px rgba(0,108,53,0.45); }
-#why-us { background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important; }
-footer#contact { background: #f1f5f9 !important; border-top: 3px solid #e2e8f0; }
-#wizard .bg-white.rounded-3xl { border: 3px solid rgba(255,255,255,0.3); box-shadow: 0 32px 64px -16px rgba(0,0,0,0.25); }
+        .btn-premium {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            padding: 16px 32px;
+            transition: transform 200ms ease-out, box-shadow 200ms ease-out;
+            border-radius: 8px;
+        }
+
+        .btn-premium:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 25px -5px rgba(0, 108, 53, 0.35);
+        }
+
+        .btn-premium:active {
+            transform: scale(0.98);
+        }
+
+        .btn-premium:focus-visible {
+            outline: 3px solid #D4AF37;
+            outline-offset: 2px;
+        }
+
+        .btn-premium:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        @media (max-width: 639px) {
+            .btn-primary-mobile {
+                min-height: 56px;
+            }
+        }
+
+        .card-hover {
+            transition: transform 250ms var(--ease-out), box-shadow 250ms var(--ease-out);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 30px -8px rgba(0, 108, 53, 0.15);
+        }
+
+        .spotlight-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .spotlight-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(16, 185, 129, 0.08), transparent 40%);
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .spotlight-card:hover::before {
+            opacity: 1;
+        }
+
+        .site-header {
+            height: 80px;
+            transition: height 250ms ease-out, box-shadow 200ms ease-out;
+        }
+
+        .scrolled-header {
+            height: 64px !important;
+            min-height: 64px;
+            background: rgba(255, 255, 255, 0.98) !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .site-header .header-inner {
+            padding-top: 32px;
+            padding-bottom: 32px;
+            transition: padding 250ms ease-out;
+        }
+
+        .scrolled-header .header-inner {
+            padding-top: 16px;
+            padding-bottom: 16px;
+        }
+
+        /* SCROLL PROGRESS - very visible */
+        .page-progress {
+            height: 6px !important;
+            background: linear-gradient(90deg, #006C35, #10b981) !important;
+            transition: width 150ms ease-out;
+            z-index: 60;
+        }
+
+        .textarea-premium {
+            min-height: 192px;
+            padding: 24px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            resize: none;
+            transition: border-color 200ms, box-shadow 200ms;
+        }
+
+        .textarea-premium:focus {
+            outline: none;
+            border-color: #006C35;
+            box-shadow: 0 0 0 4px rgba(0, 108, 53, 0.15);
+        }
+
+        .wizard-container {
+            position: relative;
+            min-height: 400px;
+        }
+
+        .step-content {
+            display: none;
+            opacity: 0;
+            transform: translateX(20px);
+            transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out);
+        }
+
+        .step-content.active {
+            display: block;
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        [dir="rtl"] .step-content {
+            transform: translateX(-20px);
+        }
+
+        [dir="rtl"] .step-content.active {
+            transform: translateX(0);
+        }
+
+        .wizard-progress-bar {
+            height: 10px;
+            border-radius: 999px;
+            background: #f1f5f9;
+            overflow: hidden;
+        }
+
+        .wizard-progress-fill {
+            height: 100%;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #006C35, #10b981);
+            transition: width 500ms var(--ease-out);
+        }
+
+        .btn-ripple {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(0);
+            animation: ripple 300ms ease-out;
+            pointer-events: none;
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        .toast-container {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 16px;
+            pointer-events: none;
+        }
+
+        .toast {
+            pointer-events: auto;
+            animation: toastIn 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+        }
+
+        @keyframes toastIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px) scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+        }
+
+        .bottom-bar {
+            transform: translateY(100%);
+            transition: transform 0.3s var(--ease-out);
+        }
+
+        .bottom-bar.visible {
+            transform: translateY(0);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 64px;
+            right: 24px;
+            z-index: 40;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            transition: opacity 300ms, transform 300ms;
+            box-shadow: 0 8px 24px rgba(0, 108, 53, 0.3);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(0) scale(1.08);
+            box-shadow: 0 12px 28px rgba(0, 108, 53, 0.4);
+        }
+
+        @media (max-width: 767px) {
+            .back-to-top {
+                bottom: 100px;
+            }
+        }
+
+        .hero-image-container {
+            perspective: 1000px;
+        }
+
+        .blob-bg {
+            animation: blob 10s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+            filter: blur(60px);
+        }
+
+        @keyframes blob {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(30px, -30px) scale(1.1);
+            }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        .stagger-child>* {
+            opacity: 0;
+            animation: fadeUpStagger 0.5s var(--ease-out) forwards;
+        }
+
+        @keyframes fadeUpStagger {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stagger-child>*:nth-child(1) {
+            animation-delay: 0ms
+        }
+
+        .stagger-child>*:nth-child(2) {
+            animation-delay: 50ms
+        }
+
+        .stagger-child>*:nth-child(3) {
+            animation-delay: 100ms
+        }
+
+        .stagger-child>*:nth-child(4) {
+            animation-delay: 150ms
+        }
+
+        .stagger-child>*:nth-child(5) {
+            animation-delay: 200ms
+        }
+
+        .stagger-child>*:nth-child(6) {
+            animation-delay: 250ms
+        }
+
+        .btn-loading {
+            pointer-events: none;
+            position: relative;
+        }
+
+        .btn-loading .btn-text {
+            visibility: hidden;
+        }
+
+        .btn-loading .btn-spinner {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        /* ========== BOLD VISUAL CHANGES SO YOU SEE THE DIFFERENCE ========== */
+        #home {
+            background: linear-gradient(180deg, #ecfdf5 0%, #f0fdf4 40%, #ffffff 100%) !important;
+        }
+
+        #services {
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%) !important;
+        }
+
+        #services .spotlight-card {
+            border: 2px solid #e2e8f0;
+            border-radius: 24px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        #services .spotlight-card:hover {
+            border-color: #86efac;
+            box-shadow: 0 24px 40px -12px rgba(0, 108, 53, 0.2);
+        }
+
+        #back-to-top {
+            background: linear-gradient(135deg, #006C35, #059669) !important;
+            color: #fff !important;
+            border: none !important;
+        }
+
+        #back-to-top i {
+            color: #fff !important;
+        }
+
+        nav.site-header {
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        nav.scrolled-header {
+            border-bottom-color: #cbd5e1;
+        }
+
+        a[href="#wizard"].btn-premium,
+        .bg-saudi-900.btn-premium {
+            background: linear-gradient(135deg, #006C35, #047857) !important;
+            box-shadow: 0 8px 24px rgba(0, 108, 53, 0.35);
+        }
+
+        a[href="#wizard"].btn-premium:hover,
+        .bg-saudi-900.btn-premium:hover {
+            box-shadow: 0 12px 32px rgba(0, 108, 53, 0.45);
+        }
+
+        #why-us {
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
+        }
+
+        footer#contact {
+            background: #f1f5f9 !important;
+            border-top: 3px solid #e2e8f0;
+        }
+
+        #wizard .bg-white.rounded-3xl {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 32px 64px -16px rgba(0, 0, 0, 0.25);
+        }
     </style>
 
 </head>
@@ -184,308 +639,381 @@ footer#contact { background: #f1f5f9 !important; border-top: 3px solid #e2e8f0; 
     <a href="#main-content" class="skip-link" data-i18n="skip">انتقل للمحتوى</a>
 
     <!-- Scroll Progress Bar -->
-    <div class="fixed top-0 left-0 right-0 z-[60] page-progress" id="page-progress" style="width: 0%" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+    <div class="fixed top-0 left-0 right-0 z-[60] page-progress" id="page-progress" style="width: 0%" role="progressbar"
+        aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 
     <!-- Navbar -->
     <header>
-    <nav id="site-nav" aria-label="القائمة الرئيسية"
-        class="site-header fixed top-0 inset-x-0 z-50 bg-white/90 backdrop-blur-lg shadow-sm border-b border-slate-100 flex items-center h-20">
-        <div class="container-premium header-inner w-full flex justify-between items-center">
-            <!-- Logo -->
-            <div class="flex items-center gap-3 group cursor-pointer" onclick="window.scrollTo(0,0)">
-                <img src="LOGO.JPEG" alt="Tamamak Dn" class="h-12 w-auto object-contain rounded-lg shadow-sm group-hover:scale-105 transition-transform">
-                <div>
-                    <h1 class="text-xl font-black tracking-tight text-slate-900 group-hover:text-saudi-800 transition-colors"
-                        data-i18n="brand">تمامك دن</h1>
-                    <p class="text-[0.65rem] text-saudi-600 font-bold uppercase tracking-wider" data-i18n="tagline">
-                        مختصون في الخدمات العامة</p>
+        <nav id="site-nav" aria-label="القائمة الرئيسية"
+            class="site-header fixed top-0 inset-x-0 z-50 bg-white/90 backdrop-blur-lg shadow-sm border-b border-slate-100 flex items-center h-20">
+            <div class="container-premium header-inner w-full flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center gap-3 group cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <img src="LOGO.JPEG" alt="Tamamak Dn"
+                        class="h-12 w-auto object-contain rounded-lg shadow-sm group-hover:scale-105 transition-transform">
+                    <div>
+                        <h1 class="text-xl font-black tracking-tight text-slate-900 group-hover:text-saudi-800 transition-colors"
+                            data-i18n="brand">تمامك دن</h1>
+                        <p class="text-[0.65rem] text-saudi-600 font-bold uppercase tracking-wider" data-i18n="tagline">
+                            مختصون في الخدمات العامة</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Links -->
+                <div class="hidden md:flex items-center gap-8 rtl:gap-8">
+                    <a href="#home" class="text-sm font-bold text-slate-600 hover:text-saudi-700 transition-colors py-2"
+                        data-i18n="nav.home">الرئيسية</a>
+                    <a href="#about"
+                        class="text-sm font-bold text-slate-600 hover:text-saudi-700 transition-colors py-2"
+                        data-i18n="nav.about">من نحن</a>
+                    <a href="#services"
+                        class="text-sm font-bold text-slate-600 hover:text-saudi-700 transition-colors py-2"
+                        data-i18n="nav.services">الخدمات</a>
+                    <a href="#why-us"
+                        class="text-sm font-bold text-slate-600 hover:text-saudi-700 transition-colors py-2"
+                        data-i18n="nav.why_us">لماذا نحن</a>
+                    <a href="#contact"
+                        class="text-sm font-bold text-slate-600 hover:text-saudi-700 transition-colors py-2"
+                        data-i18n="nav.contact">تواصل معنا</a>
+                </div>
+
+                <!-- Actions -->
+                <div class="hidden md:flex items-center gap-3">
+                    <button onclick="toggleLanguage()"
+                        class="btn-premium text-xs font-bold text-slate-500 hover:bg-slate-100 px-4 py-2 rounded-lg border border-transparent hover:border-slate-200"
+                        data-i18n="nav.langBtn">English</button>
+                    <a href="#wizard"
+                        class="btn-premium btn-ripple bg-saudi-900 text-white px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-saudi-800 shadow-lg hover:shadow-saudi-200 flex items-center gap-2">
+                        <span data-i18n="nav.cta">ابدأ الطلب</span>
+                        <i data-lucide="arrow-left" class="w-4 h-4 rtl:rotate-0 ltr:rotate-180"></i>
+                    </a>
+                </div>
+
+                <!-- Mobile Toggle -->
+                <button type="button" onclick="toggleMobileMenu()" aria-label="فتح القائمة" aria-expanded="false"
+                    aria-controls="mobile-menu"
+                    class="md:hidden text-slate-700 p-3 hover:bg-slate-100 rounded-lg transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center">
+                    <i data-lucide="menu" width="28" height="28" aria-hidden="true"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden fixed inset-0 bg-white z-[60] flex flex-col" role="dialog"
+                aria-modal="true" aria-label="قائمة الهاتف">
+                <div class="p-6 flex justify-between items-center border-b border-slate-100">
+                    <div class="flex items-center gap-3">
+                        <img src="LOGO.JPEG" alt="Tamamak Dn" class="h-10 w-auto object-contain rounded-lg">
+                        <span class="font-black text-lg" data-i18n="brand">تمامك دن</span>
+                    </div>
+                    <button type="button" onclick="toggleMobileMenu()" aria-label="إغلاق القائمة"
+                        class="min-w-[44px] min-h-[44px] p-2 bg-slate-50 rounded-full flex items-center justify-center"><i
+                            data-lucide="x" aria-hidden="true"></i></button>
+                </div>
+                <div class="p-6 flex flex-col gap-4 text-lg font-bold">
+                    <a href="#home" onclick="toggleMobileMenu()"
+                        class="p-4 bg-slate-50 rounded-2xl hover:bg-saudi-50 hover:text-saudi-700 transition-colors"
+                        data-i18n="nav.home">الرئيسية</a>
+                    <a href="#services" onclick="toggleMobileMenu()"
+                        class="p-4 bg-slate-50 rounded-2xl hover:bg-saudi-50 hover:text-saudi-700 transition-colors"
+                        data-i18n="nav.services">الخدمات</a>
+                    <a href="#wizard" onclick="toggleMobileMenu()"
+                        class="p-4 bg-saudi-900 text-white rounded-2xl shadow-lg" data-i18n="nav.cta">اطلب خدمة</a>
+                    <button type="button" onclick="toggleLanguage()" class="p-4 text-start text-slate-500 min-h-[48px]"
+                        data-i18n="nav.langBtn">English</button>
                 </div>
             </div>
-
-            <!-- Desktop Links -->
-            <div class="hidden md:flex items-center gap-8 rtl:gap-8">
-                <a href="#home" class="text-sm font-bold text-slate-600 hover:text-saudi-700 transition-colors py-2"
-                    data-i18n="nav.home">الرئيسية</a>
-                <a href="#about" class="text-sm font-bold text-slate-600 hover:text-saudi-700 transition-colors py-2"
-                    data-i18n="nav.about">من نحن</a>
-                <a href="#services" class="text-sm font-bold text-slate-600 hover:text-saudi-700 transition-colors py-2"
-                    data-i18n="nav.services">الخدمات</a>
-                <a href="#why-us" class="text-sm font-bold text-slate-600 hover:text-saudi-700 transition-colors py-2"
-                    data-i18n="nav.why_us">لماذا نحن</a>
-                <a href="#contact" class="text-sm font-bold text-slate-600 hover:text-saudi-700 transition-colors py-2"
-                    data-i18n="nav.contact">تواصل معنا</a>
-            </div>
-
-            <!-- Actions -->
-            <div class="hidden md:flex items-center gap-3">
-                <button onclick="toggleLanguage()"
-                    class="btn-premium text-xs font-bold text-slate-500 hover:bg-slate-100 px-4 py-2 rounded-lg border border-transparent hover:border-slate-200"
-                    data-i18n="nav.langBtn">English</button>
-                <a href="#wizard"
-                    class="btn-premium btn-ripple bg-saudi-900 text-white px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-saudi-800 shadow-lg hover:shadow-saudi-200 flex items-center gap-2">
-                    <span data-i18n="nav.cta">ابدأ الطلب</span>
-                    <i data-lucide="arrow-left" class="w-4 h-4 rtl:rotate-0 ltr:rotate-180"></i>
-                </a>
-            </div>
-
-            <!-- Mobile Toggle -->
-            <button type="button" onclick="toggleMobileMenu()" aria-label="فتح القائمة" aria-expanded="false" aria-controls="mobile-menu"
-                class="md:hidden text-slate-700 p-3 hover:bg-slate-100 rounded-lg transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center">
-                <i data-lucide="menu" width="28" height="28" aria-hidden="true"></i>
-            </button>
-        </div>
-
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden fixed inset-0 bg-white z-[60] flex flex-col" role="dialog" aria-modal="true" aria-label="قائمة الهاتف">
-            <div class="p-6 flex justify-between items-center border-b border-slate-100">
-                <div class="flex items-center gap-3">
-                    <img src="LOGO.JPEG" alt="Tamamak Dn" class="h-10 w-auto object-contain rounded-lg">
-                    <span class="font-black text-lg" data-i18n="brand">تمامك دن</span>
-                </div>
-                <button type="button" onclick="toggleMobileMenu()" aria-label="إغلاق القائمة" class="min-w-[44px] min-h-[44px] p-2 bg-slate-50 rounded-full flex items-center justify-center"><i data-lucide="x" aria-hidden="true"></i></button>
-            </div>
-            <div class="p-6 flex flex-col gap-4 text-lg font-bold">
-                <a href="#home" onclick="toggleMobileMenu()"
-                    class="p-4 bg-slate-50 rounded-2xl hover:bg-saudi-50 hover:text-saudi-700 transition-colors"
-                    data-i18n="nav.home">الرئيسية</a>
-                <a href="#services" onclick="toggleMobileMenu()"
-                    class="p-4 bg-slate-50 rounded-2xl hover:bg-saudi-50 hover:text-saudi-700 transition-colors"
-                    data-i18n="nav.services">الخدمات</a>
-                <a href="#wizard" onclick="toggleMobileMenu()" class="p-4 bg-saudi-900 text-white rounded-2xl shadow-lg"
-                    data-i18n="nav.cta">اطلب خدمة</a>
-                <button type="button" onclick="toggleLanguage()" class="p-4 text-start text-slate-500 min-h-[48px]"
-                    data-i18n="nav.langBtn">English</button>
-            </div>
-        </div>
-    </nav>
+        </nav>
     </header>
 
     <main id="main-content">
-    <!-- Hero Section -->
-    <section id="home"
-        class="relative section-spacing overflow-hidden flex items-center min-h-[90vh] mesh-gradient-bg pt-[calc(80px+40px)] md:pt-[calc(80px+64px)]">
-        
-        <!-- Animated Background Elements -->
-        <div class="absolute inset-0 overflow-hidden pointer-events-none">
-            <div class="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-saudi-300/20 rounded-full blur-[100px] animate-float"></div>
-            <div class="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] bg-gold-400/10 rounded-full blur-[120px] animate-float-delayed"></div>
-        </div>
+        <!-- Hero Section -->
+        <section id="home"
+            class="relative section-spacing overflow-hidden flex items-center min-h-[90vh] mesh-gradient-bg pt-[calc(80px+40px)] md:pt-[calc(80px+64px)]">
 
-        <div class="container-premium w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center relative z-10">
-            <!-- Text -->
-            <div class="text-center lg:text-start rtl:lg:text-right reveal active">
+            <!-- Animated Background Elements -->
+            <div class="absolute inset-0 overflow-hidden pointer-events-none">
                 <div
-                    class="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm border border-white/50 rounded-full text-saudi-800 text-xs font-bold mb-8 shadow-sm hover:shadow-md transition-all cursor-default ring-1 ring-saudi-100">
-                    <span class="w-2 h-2 rounded-full bg-gold-500 animate-pulse shadow-[0_0_10px_rgba(212,175,55,0.6)]"></span>
-                    <span data-i18n="tagline">مختصون في الخدمات العامة</span>
+                    class="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-saudi-300/20 rounded-full blur-[100px] animate-float">
+                </div>
+                <div
+                    class="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] bg-gold-400/10 rounded-full blur-[120px] animate-float-delayed">
+                </div>
+            </div>
+
+            <div
+                class="container-premium w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center relative z-10">
+                <!-- Text -->
+                <div class="text-center lg:text-start rtl:lg:text-right reveal active">
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm border border-white/50 rounded-full text-saudi-800 text-xs font-bold mb-8 shadow-sm hover:shadow-md transition-all cursor-default ring-1 ring-saudi-100">
+                        <span
+                            class="w-2 h-2 rounded-full bg-gold-500 animate-pulse shadow-[0_0_10px_rgba(212,175,55,0.6)]"></span>
+                        <span data-i18n="tagline">مختصون في الخدمات العامة</span>
+                    </div>
+
+                    <!-- Logo + Heading Container -->
+                    <div
+                        class="flex flex-col lg:flex-row items-center justify-center lg:justify-start gap-6 lg:gap-8 mb-6">
+                        <!-- Logo -->
+                        <div class="shrink-0">
+                            <img src="LOGO.JPEG"
+                                class="h-32 w-32 md:h-40 md:w-40 lg:h-48 lg:w-48 object-contain rounded-2xl shadow-xl ring-4 ring-white/50 hover:scale-105 transition-transform duration-300"
+                                alt="Tamamak Dn Logo">
+                        </div>
+
+                        <!-- Heading Text -->
+                        <h1
+                            class="heading-hero text-slate-900 tracking-tight text-balance drop-shadow-sm text-center lg:text-start rtl:lg:text-right">
+                            <span data-i18n="hero.h1_1">خدمات عامة احترافية</span> <br />
+                            <span class="text-gradient" data-i18n="hero.h1_2">يمكنك الوثوق بها</span>
+                        </h1>
+                    </div>
+
+                    <p class="body-text text-slate-600 mb-10 max-w-[65ch] mx-auto lg:mx-0 font-medium text-balance leading-relaxed"
+                        data-i18n="hero.p">
+                        ننجز معاملاتك الحكومية والتجارية بدقة وسرعة. شريكك المعتمد في الطائف.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start mb-12">
+                        <a href="#wizard"
+                            class="btn-premium btn-ripple btn-primary-mobile w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-saudi-900 to-saudi-700 text-white rounded-xl font-bold text-lg shadow-xl shadow-saudi-900/20 hover:shadow-saudi-900/30 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 min-h-[56px] sm:min-h-[48px] border border-transparent">
+                            <span data-i18n="hero.cta_primary">اطلب خدمتك الآن</span>
+                            <i data-lucide="arrow-left" class="w-5 h-5 rtl:rotate-0 ltr:rotate-180 icon-hover"
+                                aria-hidden="true"></i>
+                        </a>
+                        <a href="https://www.linkin1.com/reee1521" target="_blank" rel="noopener noreferrer"
+                            class="btn-premium w-full sm:w-auto px-8 py-4 bg-white/80 backdrop-blur-sm text-slate-900 border border-slate-200 rounded-xl font-bold text-lg hover:border-saudi-300 hover:bg-white flex items-center justify-center gap-2 shadow-sm hover:shadow-md transition-all duration-300">
+                            <i data-lucide="external-link" class="w-5 h-5 text-saudi-600 icon-hover"
+                                aria-hidden="true"></i>
+                            <span data-i18n="hero.cta_secondary">ملفنا الرقمي</span>
+                        </a>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-6 border-t border-slate-200/60 pt-8 stagger-child reveal">
+                        <div class="text-center lg:text-start rtl:lg:text-right group cursor-default">
+                            <p class="text-3xl font-black text-slate-900 mb-1 group-hover:text-saudi-700 transition-colors"
+                                data-i18n="hero.stat1.val">+5</p>
+                            <p class="text-sm font-semibold text-slate-500 uppercase tracking-wide"
+                                data-i18n="hero.stat1.label">سنوات خبرة</p>
+                        </div>
+                        <div class="text-center lg:text-start rtl:lg:text-right group cursor-default">
+                            <p class="text-3xl foNnt-black text-slate-900 mb-1 group-hover:text-saudi-700 transition-colors"
+                                data-i18n="hero.stat2.val">24/7</p>
+                            <p class="text-sm font-semibold text-slate-500 uppercase tracking-wide"
+                                data-i18n="hero.stat2.label">خدمة سريعة</p>
+                        </div>
+                        <div class="text-center lg:text-start rtl:lg:text-right group cursor-default">
+                            <p class="text-3xl font-black text-slate-900 mb-1 group-hover:text-saudi-700 transition-colors"
+                                data-i18n="hero.stat3.val">100%</p>
+                            <p class="text-sm font-semibold text-slate-500 uppercase tracking-wide"
+                                data-i18n="hero.stat3.label">موثوقية</p>
+                        </div>
+                    </div>
                 </div>
 
-                <h1
-                    class="heading-hero text-slate-900 mb-6 tracking-tight text-balance drop-shadow-sm">
-                    <span data-i18n="hero.h1_1">خدمات عامة احترافية</span> <br />
-                    <span class="text-gradient" data-i18n="hero.h1_2">يمكنك الوثوق بها</span>
-                </h1>
+                <!-- Image/Visual -->
+                <div class="hidden lg:block relative reveal" style="transition-delay: 200ms;">
+                    <div class="relative w-full aspect-square max-w-[500px] mx-auto hero-image-container">
+                        <!-- Main visual composition -->
+                        <div
+                            class="absolute inset-0 bg-gradient-to-br from-saudi-100 to-white rounded-[2.5rem] rotate-3 shadow-2xl border border-white/50 backdrop-blur-sm z-10">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-white rounded-[2.5rem] -rotate-3 shadow-xl border border-slate-100 z-20 flex items-center justify-center overflow-hidden group">
+                            <!-- Abstract decorative elements -->
+                            <div
+                                class="absolute top-0 right-0 w-64 h-64 bg-saudi-50 rounded-full blur-3xl opacity-60 -translate-y-1/2 translate-x-1/2">
+                            </div>
+                            <div
+                                class="absolute bottom-0 left-0 w-64 h-64 bg-gold-50 rounded-full blur-3xl opacity-60 translate-y-1/2 -translate-x-1/2">
+                            </div>
 
-                <p class="body-text text-slate-600 mb-10 max-w-[65ch] mx-auto lg:mx-0 font-medium text-balance leading-relaxed"
-                    data-i18n="hero.p">
-                    ننجز معاملاتك الحكومية والتجارية بدقة وسرعة. شريكك المعتمد في الطائف.
-                </p>
+                            <!-- Floating Icons Grid -->
+                            <div class="grid grid-cols-2 gap-8 p-12 relative z-30">
+                                <div
+                                    class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-3 animate-float shadow-lg hover:scale-105 transition-transform duration-500">
+                                    <div
+                                        class="w-12 h-12 bg-saudi-100 rounded-xl flex items-center justify-center text-saudi-600">
+                                        <i data-lucide="file-check-2" class="w-6 h-6"></i>
+                                    </div>
+                                    <span class="font-bold text-slate-800 text-sm">إنجاز فوري</span>
+                                </div>
+                                <div
+                                    class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-3 animate-float-delayed shadow-lg hover:scale-105 transition-transform duration-500 mt-8">
+                                    <div
+                                        class="w-12 h-12 bg-gold-100 rounded-xl flex items-center justify-center text-gold-600">
+                                        <i data-lucide="shield-check" class="w-6 h-6"></i>
+                                    </div>
+                                    <span class="font-bold text-slate-800 text-sm">آمن 100%</span>
+                                </div>
+                                <div
+                                    class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-3 animate-float-delayed shadow-lg hover:scale-105 transition-transform duration-500 -mt-8">
+                                    <div
+                                        class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600">
+                                        <i data-lucide="clock" class="w-6 h-6"></i>
+                                    </div>
+                                    <span class="font-bold text-slate-800 text-sm">24/7 دعم</span>
+                                </div>
+                                <div
+                                    class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-3 animate-float shadow-lg hover:scale-105 transition-transform duration-500">
+                                    <div
+                                        class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600">
+                                        <i data-lucide="users" class="w-6 h-6"></i>
+                                    </div>
+                                    <span class="font-bold text-slate-800 text-sm">خبراء</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                <div class="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start mb-12">
+
+        <!-- Services Section -->
+        <section id="services" class="section-spacing bg-slate-50 relative">
+            <div class="container-premium">
+                <div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-12 md:mb-16 reveal">
+                    <div class="max-w-2xl">
+                        <h2 class="section-headline text-slate-900 mb-4" data-i18n="services.title">خدماتنا المتميزة
+                        </h2>
+                        <p class="subheading text-slate-500" data-i18n="services.subtitle">حلول متكاملة لجميع احتياجاتك
+                        </p>
+                    </div>
                     <a href="#wizard"
-                        class="btn-premium btn-ripple btn-primary-mobile w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-saudi-900 to-saudi-700 text-white rounded-xl font-bold text-lg shadow-xl shadow-saudi-900/20 hover:shadow-saudi-900/30 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 min-h-[56px] sm:min-h-[48px] border border-transparent">
-                        <span data-i18n="hero.cta_primary">اطلب خدمتك الآن</span>
-                        <i data-lucide="arrow-left" class="w-5 h-5 rtl:rotate-0 ltr:rotate-180 icon-hover" aria-hidden="true"></i>
-                    </a>
-                    <a href="https://www.linkin1.com/reee1521" target="_blank" rel="noopener noreferrer"
-                        class="btn-premium w-full sm:w-auto px-8 py-4 bg-white/80 backdrop-blur-sm text-slate-900 border border-slate-200 rounded-xl font-bold text-lg hover:border-saudi-300 hover:bg-white flex items-center justify-center gap-2 shadow-sm hover:shadow-md transition-all duration-300">
-                        <i data-lucide="external-link" class="w-5 h-5 text-saudi-600 icon-hover" aria-hidden="true"></i>
-                        <span data-i18n="hero.cta_secondary">ملفنا الرقمي</span>
+                        class="btn-premium px-6 py-3 bg-white border border-slate-200 rounded-xl text-saudi-700 font-bold flex items-center gap-2 hover:border-saudi-200">
+                        <span data-i18n="nav.cta">اطلب خدمة</span>
+                        <i data-lucide="arrow-left" class="w-4 h-4 rtl:rotate-0 ltr:rotate-180" aria-hidden="true"></i>
                     </a>
                 </div>
 
-                <div class="grid grid-cols-3 gap-6 border-t border-slate-200/60 pt-8 stagger-child reveal">
-                    <div class="text-center lg:text-start rtl:lg:text-right group cursor-default">
-                        <p class="text-3xl font-black text-slate-900 mb-1 group-hover:text-saudi-700 transition-colors" data-i18n="hero.stat1.val">+5</p>
-                        <p class="text-sm font-semibold text-slate-500 uppercase tracking-wide" data-i18n="hero.stat1.label">سنوات خبرة</p>
-                    </div>
-                    <div class="text-center lg:text-start rtl:lg:text-right group cursor-default">
-                        <p class="text-3xl foNnt-black text-slate-900 mb-1 group-hover:text-saudi-700 transition-colors" data-i18n="hero.stat2.val">24/7</p>
-                        <p class="text-sm font-semibold text-slate-500 uppercase tracking-wide" data-i18n="hero.stat2.label">خدمة سريعة</p>
-                    </div>
-                    <div class="text-center lg:text-start rtl:lg:text-right group cursor-default">
-                        <p class="text-3xl font-black text-slate-900 mb-1 group-hover:text-saudi-700 transition-colors" data-i18n="hero.stat3.val">100%</p>
-                        <p class="text-sm font-semibold text-slate-500 uppercase tracking-wide" data-i18n="hero.stat3.label">موثوقية</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Image/Visual -->
-            <div class="hidden lg:block relative reveal" style="transition-delay: 200ms;">
-                 <div class="relative w-full aspect-square max-w-[500px] mx-auto hero-image-container">
-                    <!-- Main visual composition -->
-                    <div class="absolute inset-0 bg-gradient-to-br from-saudi-100 to-white rounded-[2.5rem] rotate-3 shadow-2xl border border-white/50 backdrop-blur-sm z-10"></div>
-                    <div class="absolute inset-0 bg-white rounded-[2.5rem] -rotate-3 shadow-xl border border-slate-100 z-20 flex items-center justify-center overflow-hidden group">
-                        <!-- Abstract decorative elements -->
-                        <div class="absolute top-0 right-0 w-64 h-64 bg-saudi-50 rounded-full blur-3xl opacity-60 -translate-y-1/2 translate-x-1/2"></div>
-                        <div class="absolute bottom-0 left-0 w-64 h-64 bg-gold-50 rounded-full blur-3xl opacity-60 translate-y-1/2 -translate-x-1/2"></div>
-                        
-                        <!-- Floating Icons Grid -->
-                        <div class="grid grid-cols-2 gap-8 p-12 relative z-30">
-                            <div class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-3 animate-float shadow-lg hover:scale-105 transition-transform duration-500">
-                                <div class="w-12 h-12 bg-saudi-100 rounded-xl flex items-center justify-center text-saudi-600">
-                                    <i data-lucide="file-check-2" class="w-6 h-6"></i>
-                                </div>
-                                <span class="font-bold text-slate-800 text-sm">إنجاز فوري</span>
-                            </div>
-                            <div class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-3 animate-float-delayed shadow-lg hover:scale-105 transition-transform duration-500 mt-8">
-                                <div class="w-12 h-12 bg-gold-100 rounded-xl flex items-center justify-center text-gold-600">
-                                    <i data-lucide="shield-check" class="w-6 h-6"></i>
-                                </div>
-                                <span class="font-bold text-slate-800 text-sm">آمن 100%</span>
-                            </div>
-                            <div class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-3 animate-float-delayed shadow-lg hover:scale-105 transition-transform duration-500 -mt-8">
-                                <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600">
-                                    <i data-lucide="clock" class="w-6 h-6"></i>
-                                </div>
-                                <span class="font-bold text-slate-800 text-sm">24/7 دعم</span>
-                            </div>
-                            <div class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-3 animate-float shadow-lg hover:scale-105 transition-transform duration-500">
-                                <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600">
-                                    <i data-lucide="users" class="w-6 h-6"></i>
-                                </div>
-                                <span class="font-bold text-slate-800 text-sm">خبراء</span>
-                            </div>
-                        </div>
-                    </div>
-                 </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- Services Section -->
-    <section id="services" class="section-spacing bg-slate-50 relative">
-        <div class="container-premium">
-            <div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-12 md:mb-16 reveal">
-                <div class="max-w-2xl">
-                    <h2 class="section-headline text-slate-900 mb-4" data-i18n="services.title">خدماتنا المتميزة</h2>
-                    <p class="subheading text-slate-500" data-i18n="services.subtitle">حلول متكاملة لجميع احتياجاتك</p>
-                </div>
-                <a href="#wizard"
-                    class="btn-premium px-6 py-3 bg-white border border-slate-200 rounded-xl text-saudi-700 font-bold flex items-center gap-2 hover:border-saudi-200">
-                    <span data-i18n="nav.cta">اطلب خدمة</span>
-                    <i data-lucide="arrow-left" class="w-4 h-4 rtl:rotate-0 ltr:rotate-180" aria-hidden="true"></i>
-                </a>
-            </div>
-
-            <div id="services-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                <!-- JS Injected -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Chatbot Wizard -->
-    <section id="wizard" class="section-spacing bg-saudi-900 relative overflow-hidden text-white">
-        <div class="absolute inset-0 opacity-10 pointer-events-none"
-            style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 40px 40px;"></div>
-
-        <div class="max-w-3xl mx-auto container-premium relative z-10">
-            <div class="text-center mb-12 md:mb-16 reveal">
-                <h2 class="section-headline md:text-[2.5rem] text-white mb-4" data-i18n="wizard.title">المساعد الذكي</h2>
-                <p class="subheading text-saudi-200" data-i18n="wizard.subtitle">اطلب خدمتك في 3 خطوات بسيطة</p>
-            </div>
-
-            <div class="wizard-container bg-white/95 backdrop-blur-xl border border-white/20 rounded-[2rem] shadow-2xl shadow-saudi-900/50 p-8 md:p-12 text-slate-900 min-h-[500px] flex flex-col relative reveal ring-1 ring-white/50">
-                <!-- Decorative glow -->
-                <div class="absolute top-0 right-0 w-64 h-64 bg-saudi-100/50 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
-                <div class="absolute bottom-0 left-0 w-64 h-64 bg-gold-100/50 rounded-full blur-3xl opacity-50 translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
-
-                <!-- Step X of Y + Progress Bar -->
-                <!-- Removed Steps Indicator for Single View -->
-                
-                <div class="flex-grow">
-                    <!-- Unified Step 1: Category + Details -->
-                    <div id="step-0" class="step-content active">
-                        <h3 class="section-headline text-2xl md:text-3xl font-bold mb-8 text-center leading-snug" data-i18n="wizard.step1_q">مرحباً 👋، أي نوع من الخدمات تبحث عنه اليوم؟</h3>
-                        
-                        <!-- Categories Grid -->
-                        <div id="wizard-cats" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-                            <!-- JS Injected -->
-                        </div>
-
-                        <!-- Details Input (Initially Visible) -->
-                        <div class="space-y-4 pt-6 border-t border-slate-200/50">
-                            <label for="wizard-details" class="block text-lg font-bold text-slate-800" data-i18n="wizard.details_label">اكتب تفاصيل طلبك هنا (أو اختر من الأعلى)</label>
-                            <div class="relative group">
-                                <div class="absolute -inset-1 bg-gradient-to-r from-saudi-400 to-gold-400 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-500"></div>
-                                <textarea id="wizard-details" maxlength="500" aria-describedby="char-count-desc"
-                                    class="relative textarea-premium w-full bg-white text-slate-900 text-lg leading-relaxed shadow-sm border border-slate-200 p-4 rounded-xl focus:ring-2 focus:ring-saudi-500 focus:border-saudi-500 min-h-[120px]"
-                                    oninput="saveDetails(this.value)" placeholder=""></textarea>
-                                <div id="char-count" class="absolute bottom-4 left-4 text-xs font-bold text-slate-400 bg-white/80 px-2 py-1 rounded" aria-live="polite">0 / 500</div>
-                            </div>
-                        </div>
-
-                        <!-- Single Action Button -->
-                         <div class="mt-8 flex justify-center">
-                            <button type="button" onclick="setWizardStep(2)"
-                                class="btn-premium w-full md:w-auto px-12 py-4 bg-saudi-900 text-white rounded-xl font-bold text-lg hover:bg-saudi-800 shadow-xl hover:shadow-saudi-900/20 transition-all hover:-translate-y-1">
-                                <span data-i18n="wizard.next">التالي</span>
-                                <i data-lucide="arrow-left" class="w-5 h-5 rtl:rotate-0 ltr:rotate-180"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Hidden Step 1 (Skipped) -->
-                    <div id="step-1" class="hidden"></div>
-
-                    <!-- Final Step -->
-                    <div id="step-2" class="step-content text-center pt-8 hidden opacity-0">
-                        <div class="w-24 h-24 md:w-28 md:h-28 bg-green-100 rounded-full flex items-center justify-center text-green-600 mx-auto mb-8 animate-bounce">
-                            <i data-lucide="whatsapp" width="48" height="48" aria-hidden="true"></i>
-                        </div>
-                        <h3 class="section-headline text-2xl md:text-3xl font-black mb-4 text-slate-900" data-i18n="wizard.step3_q">رائع! طلبك جاهز للإرسال 🚀</h3>
-                        <p class="body-text text-slate-500 mb-10 max-w-sm mx-auto">سيتم تحويلك الآن إلى محادثة واتساب مع أحد موظفينا لإتمام الخدمة.</p>
-
-                        <button type="button" id="wizard-send-btn" onclick="sendWhatsapp()"
-                            class="btn-premium btn-ripple btn-primary-mobile w-full md:w-auto px-12 py-5 bg-[#25D366] text-white rounded-xl font-bold text-lg shadow-xl shadow-green-200 hover:bg-[#128c7e] flex items-center justify-center gap-3 mx-auto min-h-[56px] md:min-h-[48px]">
-                            <i data-lucide="send" class="w-5 h-5" aria-hidden="true"></i>
-                            <span class="btn-text" data-i18n="wizard.btn">إرسال إلى واتساب</span>
-                        </button>
-                        
-                        <button type="button" onclick="setWizardStep(0)" class="mt-6 text-slate-400 font-bold text-sm hover:text-slate-600 underline decoration-slate-300 underline-offset-4" data-i18n="wizard.back">تعديل الطلب</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Why Us Section -->
-    <section id="why-us" class="section-spacing bg-white">
-        <div class="container-premium grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <div class="order-2 lg:order-1 reveal">
-                <span class="text-saudi-600 font-bold uppercase tracking-widest text-xs mb-4 block"
-                    data-i18n="brand">تمامك دن</span>
-                <h2 class="section-headline text-slate-900 mb-8 md:mb-10" data-i18n="why_us.title">لماذا تختار تمامك دن؟</h2>
-                <div id="why-us-grid" class="flex flex-col gap-4">
+                <div id="services-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     <!-- JS Injected -->
                 </div>
             </div>
-            <div class="order-1 lg:order-2 reveal relative">
+        </section>
+
+        <!-- Chatbot Wizard -->
+        <section id="wizard" class="section-spacing bg-saudi-900 relative overflow-hidden text-white">
+            <div class="absolute inset-0 opacity-10 pointer-events-none"
+                style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 40px 40px;"></div>
+
+            <div class="max-w-3xl mx-auto container-premium relative z-10">
+                <div class="text-center mb-12 md:mb-16 reveal">
+                    <h2 class="section-headline md:text-[2.5rem] text-white mb-4" data-i18n="wizard.title">المساعد الذكي
+                    </h2>
+                    <p class="subheading text-saudi-200" data-i18n="wizard.subtitle">اطلب خدمتك في 3 خطوات بسيطة</p>
+                </div>
+
                 <div
-                    class="relative rounded-[3rem] overflow-hidden shadow-2xl transition-all duration-700 aspect-square group">
-                    <div class="absolute inset-0 bg-white"></div>
-                    <img src="LOGO.JPEG"
-                        class="w-full h-full object-contain p-12 opacity-90 group-hover:scale-110 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-saudi-900/95 via-saudi-900/20 to-transparent"></div>
-                    <div class="absolute bottom-10 right-10 left-10 text-white">
-                        <div class="text-6xl font-black mb-3">100%</div>
-                        <div class="text-xl font-medium opacity-90">رضا العملاء وضمان الإنجاز</div>
+                    class="wizard-container bg-white/95 backdrop-blur-xl border border-white/20 rounded-[2rem] shadow-2xl shadow-saudi-900/50 p-8 md:p-12 text-slate-900 min-h-[500px] flex flex-col relative reveal ring-1 ring-white/50">
+                    <!-- Decorative glow -->
+                    <div
+                        class="absolute top-0 right-0 w-64 h-64 bg-saudi-100/50 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2 pointer-events-none">
+                    </div>
+                    <div
+                        class="absolute bottom-0 left-0 w-64 h-64 bg-gold-100/50 rounded-full blur-3xl opacity-50 translate-y-1/2 -translate-x-1/2 pointer-events-none">
+                    </div>
+
+                    <!-- Step X of Y + Progress Bar -->
+                    <!-- Removed Steps Indicator for Single View -->
+
+                    <div class="flex-grow">
+                        <!-- Unified Step 1: Category + Details -->
+                        <div id="step-0" class="step-content active">
+                            <h3 class="section-headline text-2xl md:text-3xl font-bold mb-8 text-center leading-snug"
+                                data-i18n="wizard.step1_q">مرحباً 👋، أي نوع من الخدمات تبحث عنه اليوم؟</h3>
+
+                            <!-- Categories Grid -->
+                            <div id="wizard-cats" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                                <!-- JS Injected -->
+                            </div>
+
+                            <!-- Details Input (Initially Visible) -->
+                            <div class="space-y-4 pt-6 border-t border-slate-200/50">
+                                <label for="wizard-details" class="block text-lg font-bold text-slate-800"
+                                    data-i18n="wizard.details_label">اكتب تفاصيل طلبك هنا (أو اختر من الأعلى)</label>
+                                <div class="relative group">
+                                    <div
+                                        class="absolute -inset-1 bg-gradient-to-r from-saudi-400 to-gold-400 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-500">
+                                    </div>
+                                    <textarea id="wizard-details" maxlength="500" aria-describedby="char-count-desc"
+                                        class="relative textarea-premium w-full bg-white text-slate-900 text-lg leading-relaxed shadow-sm border border-slate-200 p-4 rounded-xl focus:ring-2 focus:ring-saudi-500 focus:border-saudi-500 min-h-[120px]"
+                                        oninput="saveDetails(this.value)" placeholder=""></textarea>
+                                    <div id="char-count"
+                                        class="absolute bottom-4 left-4 text-xs font-bold text-slate-400 bg-white/80 px-2 py-1 rounded"
+                                        aria-live="polite">0 / 500</div>
+                                </div>
+                            </div>
+
+                            <!-- Single Action Button -->
+                            <div class="mt-8 flex justify-center">
+                                <button type="button" onclick="setWizardStep(2)"
+                                    class="btn-premium w-full md:w-auto px-12 py-4 bg-saudi-900 text-white rounded-xl font-bold text-lg hover:bg-saudi-800 shadow-xl hover:shadow-saudi-900/20 transition-all hover:-translate-y-1">
+                                    <span data-i18n="wizard.next">التالي</span>
+                                    <i data-lucide="arrow-left" class="w-5 h-5 rtl:rotate-0 ltr:rotate-180"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Hidden Step 1 (Skipped) -->
+                        <div id="step-1" class="hidden"></div>
+
+                        <!-- Final Step -->
+                        <div id="step-2" class="step-content text-center pt-8 hidden opacity-0">
+                            <div
+                                class="w-24 h-24 md:w-28 md:h-28 bg-green-100 rounded-full flex items-center justify-center text-green-600 mx-auto mb-8 animate-bounce">
+                                <i data-lucide="whatsapp" width="48" height="48" aria-hidden="true"></i>
+                            </div>
+                            <h3 class="section-headline text-2xl md:text-3xl font-black mb-4 text-slate-900"
+                                data-i18n="wizard.step3_q">رائع! طلبك جاهز للإرسال 🚀</h3>
+                            <p class="body-text text-slate-500 mb-10 max-w-sm mx-auto">سيتم تحويلك الآن إلى محادثة
+                                واتساب مع أحد موظفينا لإتمام الخدمة.</p>
+
+                            <button type="button" id="wizard-send-btn" onclick="sendWhatsapp()"
+                                class="btn-premium btn-ripple btn-primary-mobile w-full md:w-auto px-12 py-5 bg-[#25D366] text-white rounded-xl font-bold text-lg shadow-xl shadow-green-200 hover:bg-[#128c7e] flex items-center justify-center gap-3 mx-auto min-h-[56px] md:min-h-[48px]">
+                                <i data-lucide="send" class="w-5 h-5" aria-hidden="true"></i>
+                                <span class="btn-text" data-i18n="wizard.btn">إرسال إلى واتساب</span>
+                            </button>
+
+                            <button type="button" onclick="setWizardStep(0)"
+                                class="mt-6 text-slate-400 font-bold text-sm hover:text-slate-600 underline decoration-slate-300 underline-offset-4"
+                                data-i18n="wizard.back">تعديل الطلب</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- Why Us Section -->
+        <section id="why-us" class="section-spacing bg-white">
+            <div class="container-premium grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <div class="order-2 lg:order-1 reveal">
+                    <span class="text-saudi-600 font-bold uppercase tracking-widest text-xs mb-4 block"
+                        data-i18n="brand">تمامك دن</span>
+                    <h2 class="section-headline text-slate-900 mb-8 md:mb-10" data-i18n="why_us.title">لماذا تختار تمامك
+                        دن؟</h2>
+                    <div id="why-us-grid" class="flex flex-col gap-4">
+                        <!-- JS Injected -->
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2 reveal relative">
+                    <div
+                        class="relative rounded-[3rem] overflow-hidden shadow-2xl transition-all duration-700 aspect-square group">
+                        <div class="absolute inset-0 bg-white"></div>
+                        <img src="LOGO.JPEG"
+                            class="w-full h-full object-contain p-12 opacity-90 group-hover:scale-110 transition-transform duration-700">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-saudi-900/95 via-saudi-900/20 to-transparent">
+                        </div>
+                        <div class="absolute bottom-10 right-10 left-10 text-white">
+                            <div class="text-6xl font-black mb-3">100%</div>
+                            <div class="text-xl font-medium opacity-90">رضا العملاء وضمان الإنجاز</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
     </main>
 
@@ -562,7 +1090,8 @@ footer#contact { background: #f1f5f9 !important; border-top: 3px solid #e2e8f0; 
             <span class="text-xs font-bold text-slate-500 uppercase">هل تحتاج مساعدة؟</span>
             <span class="font-black text-slate-900">نحن هنا 24/7</span>
         </div>
-        <a href="https://wa.me/966573806638" class="btn-premium btn-primary-mobile min-h-[56px] bg-[#25D366] text-white px-6 py-3 rounded-xl font-bold flex items-center gap-2 shadow-lg shadow-green-100"
+        <a href="https://wa.me/966573806638"
+            class="btn-premium btn-primary-mobile min-h-[56px] bg-[#25D366] text-white px-6 py-3 rounded-xl font-bold flex items-center gap-2 shadow-lg shadow-green-100"
             aria-label="تواصل عبر واتساب">
             <i data-lucide="message-circle" width="20" aria-hidden="true"></i>
             <span>واتساب</span>
@@ -570,7 +1099,8 @@ footer#contact { background: #f1f5f9 !important; border-top: 3px solid #e2e8f0; 
     </div>
 
     <!-- Back to Top -->
-    <button type="button" id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="العودة للأعلى"
+    <button type="button" id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"
+        aria-label="العودة للأعلى"
         class="back-to-top bg-white text-saudi-900 border border-slate-100 rounded-full shadow-xl hover:shadow-2xl flex items-center justify-center">
         <i data-lucide="arrow-up" width="24" height="24" aria-hidden="true"></i>
     </button>
